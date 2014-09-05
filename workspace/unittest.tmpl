@@ -1,0 +1,48 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+[TestClass]
+public class ${ClassName}Test
+{
+${<foreach Examples e}
+    [TestMethod]
+    public void Example${e.Num}()
+    {
+${<foreach e.Input in}
+${<if !in.Param.Type.Array}
+        ${in.Param.Type.Primitive} ${in.Param.Name} = ${in};
+        Console.WriteLine("${in.Param.Name}:{0}",${in.Param.Name});
+${<else}
+        ${in.Param.Type.Primitive}[] ${in.Param.Name} = new ${in.Param.Type} {${foreach in.ValueList v ,}
+            ${v}${end}
+        };
+        Console.WriteLine(string.Format("${in.Param.Name}:{0}",string.Join(" ",${in.Param.Name})));
+${<end}
+${<end}
+${<if !e.Output.Param.Type.Array}
+        ${e.Output.Param.Type.Primitive} __expected = ${e.Output};
+        Console.WriteLine("__expected:${e.Output}");
+${<else}
+        ${e.Output.Param.Type.Primitive}[] __expected = new ${e.Output.Param.Type} {${foreach e.Output.ValueList v ,}
+            ${v}${end}
+        };
+        Console.WriteLine(string.Format("__expected:{0}",string.Join(" ",__expected)));
+${<end}
+        ${Method.ReturnType} __result = new ${ClassName}().${Method.Name}(${foreach e.Input in , }${in.Param.Name}${end});
+${<if !e.Output.Param.Type.Array}
+        Console.WriteLine("__result:{0}",__result);
+${<else}
+        Console.WriteLine(string.Format("__result:{0}",string.Join(" ",__result)));
+${<end}        
+${<if Method.ReturnType.RealNumber}
+        Assert.AreEqual(__expected, __result,1e-9);
+${<else}
+    ${<if Method.ReturnType.Array}
+        CollectionAssert.AreEquivalent(__expected, __result);
+     ${<else}   
+        Assert.AreEqual(__expected, __result);
+    ${<end}
+${<end}
+    }
+
+${<end}
+}

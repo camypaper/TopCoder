@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+public class ${ClassName}
+{
+	public ${Method.ReturnType} ${Method.Name}(${Method.Params})
+    {
+		return ${Method.ReturnType;zeroval};
+	}
+
+
+${CutBegin}
+public static void Main(string[] args)
+{
+        var stream = new System.IO.StreamWriter("log.txt");
+        System.Diagnostics.Debug.Listeners.Add(new System.Diagnostics.TextWriterTraceListener(stream));
+        var manTest = new ${ClassName}();
+        var autoTest = new ${ClassName}Test();
+}
+${CutEnd}
+}
+static public partial class EnumerableEX
+{
+    static public string AsString(this IEnumerable<char> source)
+    {
+        return new string(source.ToArray());
+    }
+}

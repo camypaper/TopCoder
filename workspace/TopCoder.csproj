@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF42456D-1D2F-46F3-AC65-58505E6AF9BA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TopCoder</RootNamespace>
+    <AssemblyName>TopCoder</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Library\Algorithm.cs">
+      <Link>Library\Algorithm.cs</Link>
+    </None>
+    <None Include="..\..\Library\Data.cs">
+      <Link>Library\Data.cs</Link>
+    </None>
+    <None Include="..\..\Library\RMQ.cs">
+      <Link>Library\RMQ.cs</Link>
+    </None>
+    <None Include="..\..\Library\Tequnique.cs">
+      <Link>Library\Tequnique.cs</Link>
+    </None>
+    <None Include="EnumerableEx.cs" />
+    <None Include="..\..\Library\MathEx.cs">
+      <Link>Library\MathEx.cs</Link>
+    </None>
+    <None Include="..\..\Library\NumericalSequence.cs">
+      <Link>Library\NumericalSequence.cs</Link>
+    </None>
+    <None Include="..\..\Library\Graph.cs">
+      <Link>Library\Graph.cs</Link>
+    </None>
+    <Compile Include="Problem.cs" />
+    <Compile Include="UnitTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Description.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <MySourceFiles Include="Problem.cs;Description.html;UnitTest.cs" />
+      <DestinationConfig Include="Conf.config" />
+    </ItemGroup>
+    <ReadLinesFromFile File="@(DestinationConfig)">
+      <Output TaskParameter="Lines" ItemName="ItemsFromFile" />
+    </ReadLinesFromFile>
+    <Copy SourceFiles="@(MySourceFiles)" OverwriteReadOnlyFiles="True" DestinationFiles="@(ItemsFromFile)" />
+  </Target>
+</Project>
