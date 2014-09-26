@@ -11,6 +11,8 @@ These are my setting files for TopCoder.
 - on_generated.py (action after the file generated.)
 - source_cs.tmpl (template for C# source code file.)
 - unittest.tmpl (template for unittest source code file.)
+- Scanner.cs (Helper class to read input.)
+- Printer.cs (Helper class to write output.)
 
 # How does it work?
 On opening the problem in the Arena, greed creates 'Problem.cs', 'Description.html' and 'UnitTest.cs'.
