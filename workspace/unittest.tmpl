@@ -20,7 +20,7 @@ ${<end}
 ${<end}
 ${<if !e.Output.Param.Type.Array}
         ${e.Output.Param.Type.Primitive} __expected = ${e.Output};
-        Console.WriteLine("__expected:${e.Output}");
+        Console.WriteLine("__expected:{0}",__expected);
 ${<else}
         ${e.Output.Param.Type.Primitive}[] __expected = new ${e.Output.Param.Type} {${foreach e.Output.ValueList v ,}
             ${v}${end}

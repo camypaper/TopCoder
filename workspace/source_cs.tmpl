@@ -11,13 +11,33 @@ public class ${ClassName}
 
 
 ${CutBegin}
-public static void Main(string[] args)
-{
+    public void ManualTest(${Method.Params})
+    {
+        var sw = new System.Diagnostics.Stopwatch();
+        ${<foreach Method.Params p}${<if !p.Type.Array}Printer.PrintLine("${p.Name}:{0}",${p.Name});
+        ${<else}Printer.PrintLine(string.Format("${p.Name}:{0}",string.Join(" ",${p.Name})));${<end}${<end}
+
+        sw.Start();
+        var ret = ${Method.Name}(${foreach Method.Params p , }${p.Name}${end});
+        Printer.PrintLine("Result:{0}",ret);
+        sw.Stop();
+        Printer.PrintLine("Time:{0}ms",sw.ElapsedMilliseconds);
+
+    }
+    public static void Main(string[] args)
+    {
         var stream = new System.IO.StreamWriter("log.txt");
+        var iStream = new System.IO.FileStream("input.txt", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
         System.Diagnostics.Debug.Listeners.Add(new System.Diagnostics.TextWriterTraceListener(stream));
-        var manTest = new ${ClassName}();
-        var autoTest = new ${ClassName}Test();
-}
+        var sc= new _Scanner(new System.IO.StreamReader(iStream));
+        var t = new ${ClassName}();
+        var u = new ${ClassName}Test();
+
+
+
+        
+        Console.ReadKey(true);
+    }
 ${CutEnd}
 }
 static public partial class EnumerableEX

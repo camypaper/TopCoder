@@ -1,0 +1,165 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+*.jar
+*.sln
+*.suo
+*.suo
+workspace/App.config
+workspace/bin/Debug/TopCoder.vshost.exe.config
+workspace/bin/Debug/TopCoder.vshost.exe.manifest
+workspace/debug.txt
+workspace/Description.html
+workspace/EnumerableEx.cs
+*.cache
+workspace/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+workspace/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+workspace/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+workspace/obj/Debug/TopCoder.csproj.FileListAbsolute.txt
+*.exe
+workspace/py_dbg.txt
+workspace/TopCoder.exe.config
+workspace/TopCoder.pdb
+workspace/TopCoder.vshost.exe.config
+workspace/TopCoder.vshost.exe.manifest
+workspace/UnitTest.cs
+workspace/obj/Debug/TopCoder.pdb
+workspace/Properties/AssemblyInfo.cs
+workspace/conf.config
+workspace/Problem.cs
+workspace/log.txt
+workspace/cs_proj.tmpl
+workspace/test_cs.tmpl
+workspace/topcoder.tmpl
+workspace/SRM 354/UnsealTheSafe.cs
+workspace/SRM 354/UnsealTheSafe.html
+workspace/SRM 354/UnsealTheSafeUnitTest.cs
+workspace/SRM 587/InsertZ.cs
+workspace/SRM 587/InsertZ.html
+workspace/SRM 587/JumpFurther.cs
+workspace/SRM 587/InsertZUnitTest.cs
+workspace/SRM 587/JumpFurther.html
+workspace/SRM 587/JumpFurtherUnitTest.cs
+workspace/SRM 587/ThreeColorabilityEasy.cs
+workspace/SRM 587/ThreeColorabilityEasy.html
+workspace/SRM 587/ThreeColorabilityEasyUnitTest.cs
+*.jnlp
+*.swp
+*.class
+*.properties
+plugin/Greed-2.0-RC-7.1.0/com/floreysoft/jmte/package.html
+plugin/Greed-2.0-RC-7.1.0/default.conf
+plugin/Greed-2.0-RC-7.1.0/META-INF/MANIFEST.MF
+plugin/Greed-2.0-RC-7.1.0/template-defs.conf
+plugin/Greed-2.0-RC-7.1.0/templates/dualcolor/main.cpp.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/dualcolor/main.py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/dualcolor/README.md
+plugin/Greed-2.0-RC-7.1.0/templates/dualcolor/tester.cpp.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/dualcolor/tester.py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/filetest/cpp.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/filetest/java.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/filetest/cs.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/filetest/py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/problem/blue.theme.css
+plugin/Greed-2.0-RC-7.1.0/templates/problem/dark.theme.css
+plugin/Greed-2.0-RC-7.1.0/templates/problem/darkgray.theme.css
+plugin/Greed-2.0-RC-7.1.0/templates/problem/default.css
+plugin/Greed-2.0-RC-7.1.0/templates/problem/desc.html.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/source/cpp.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/problem/light.theme.css
+plugin/Greed-2.0-RC-7.1.0/templates/source/java.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/source/py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/test/cpp.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/source/cs.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/test/cs.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/test/py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/test/java.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/testcase/testcases.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/unittest/junit.java.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/unittest/unittest.py.tmpl
+plugin/Greed-2.0-RC-7.1.0/templates/unittest/nunit.cs.tmpl
+plugin/Greed-2.0-RC-7.1.0/version
+workspace/Appirio Internal Contest/Conquest.cs
+workspace/Appirio Internal Contest/Conquest.html
+workspace/Appirio Internal Contest/ConquestUnitTest.cs
+workspace/Appirio Internal Contest/InternetConnection.cs
+workspace/Appirio Internal Contest/InternetConnection.html
+workspace/Appirio Internal Contest/InternetConnectionUnitTest.cs
+workspace/Appirio Internal Contest/TheCoinsProblem.cs
+workspace/Appirio Internal Contest/TheCoinsProblem.html
+workspace/Appirio Internal Contest/TheCoinsProblemUnitTest.cs
+workspace/Single Round Match 633/GCDLCMEasyUnitTest.cs
+workspace/Single Round Match 633/Jumping.cs
+workspace/Single Round Match 633/Jumping.html
+workspace/Single Round Match 633/JumpingUnitTest.cs
+workspace/Single Round Match 633/Target.html
+workspace/Single Round Match 633/TargetUnitTest.cs
+workspace/Single Round Match 633/Target.cs
+workspace/SRM 632/PotentialGeometricSequence.cs
+workspace/SRM 632/PotentialGeometricSequence.html
+workspace/SRM 632/PotentialGeometricSequenceUnitTest.cs
+workspace/SRM 632/RunningAroundPark.cs
+workspace/SRM 632/RunningAroundParkUnitTest.cs
+workspace/SRM 633/GCDLCMEasy.cs
+workspace/SRM 633/GCDLCMEasy.html
+workspace/SRM 633/GCDLCMEasyUnitTest.cs
+workspace/SRM 633/Jumping.cs
+workspace/SRM 632/RunningAroundPark.html
+workspace/SRM 633/JumpingUnitTest.cs
+workspace/SRM 633/Jumping.html
+workspace/SRM 633/Target.cs
+workspace/SRM 633/Target.html
+workspace/SRM 633/TargetUnitTest.cs
+workspace/input.txt
+workspace/Single Round Match 634/MountainRanges.html
+workspace/Single Round Match 634/MountainRangesUnitTest.cs
+workspace/Single Round Match 634/MountainRanges.cs
+workspace/Single Round Match 634/ShoppingSurveyDiv2.html
+workspace/Single Round Match 634/ShoppingSurveyDiv2.cs
+workspace/Single Round Match 634/SpecialStrings.cs
+workspace/Single Round Match 634/ShoppingSurveyDiv2UnitTest.cs
+workspace/Single Round Match 634/SpecialStrings.html
+workspace/Single Round Match 634/SpecialStringsUnitTest.cs
+workspace/SRM 175/Books.cs
+workspace/SRM 175/Books.html
+workspace/SRM 175/BooksUnitTest.cs
+workspace/SRM 634/MountainRangesUnitTest.cs
+workspace/SRM 634/MountainRanges.html
+workspace/SRM 634/ShoppingSurveyDiv2.cs
+workspace/SRM 634/ShoppingSurveyDiv2.html
+workspace/SRM 634/ShoppingSurveyDiv2UnitTest.cs
