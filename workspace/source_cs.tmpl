@@ -11,19 +11,6 @@ public class ${ClassName}
 
 
 ${CutBegin}
-    public void ManualTest(${Method.Params})
-    {
-        var sw = new System.Diagnostics.Stopwatch();
-        ${<foreach Method.Params p}${<if !p.Type.Array}Printer.PrintLine("${p.Name}:{0}",${p.Name});
-        ${<else}Printer.PrintLine(string.Format("${p.Name}:{0}",string.Join(" ",${p.Name})));${<end}${<end}
-
-        sw.Start();
-        var ret = ${Method.Name}(${foreach Method.Params p , }${p.Name}${end});
-        Printer.PrintLine("Result:{0}",ret);
-        sw.Stop();
-        Printer.PrintLine("Time:{0}ms",sw.ElapsedMilliseconds);
-
-    }
     public static void Main(string[] args)
     {
         var stream = new System.IO.StreamWriter("log.txt");
@@ -38,6 +25,22 @@ ${CutBegin}
         
         Console.ReadKey(true);
     }
+
+    
+    public void ManualTest(${Method.Params})
+    {
+        var sw = new System.Diagnostics.Stopwatch();
+        ${<foreach Method.Params p}${<if !p.Type.Array}Printer.PrintLine("${p.Name}:{0}",${p.Name});
+        ${<else}Printer.PrintLine(string.Format("${p.Name}:{0}",string.Join(" ",${p.Name})));${<end}${<end}
+
+        sw.Start();
+        var ret = ${Method.Name}(${foreach Method.Params p , }${p.Name}${end});
+        Printer.PrintLine("Result:{0}",ret);
+        sw.Stop();
+        Printer.PrintLine("Time:{0}ms",sw.ElapsedMilliseconds);
+
+    }
+    
 ${CutEnd}
 }
 static public partial class EnumerableEX
