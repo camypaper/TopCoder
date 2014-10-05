@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,7 +55,6 @@
     <None Include="..\..\Library\Tequnique.cs">
       <Link>Library\Tequnique.cs</Link>
     </None>
-    <None Include="EnumerableEx.cs" />
     <None Include="..\..\Library\MathEx.cs">
       <Link>Library\MathEx.cs</Link>
     </None>
