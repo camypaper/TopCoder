@@ -66,7 +66,6 @@
     </None>
     <Compile Include="Problem.cs" />
     <Compile Include="Scanner.cs" />
-    <Compile Include="Printer.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,8 +76,8 @@
     <Content Include="Description.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="log.txt" />
-    <None Include="input.txt" />
+    <None Include="dbg.out" />
+    <None Include="in.in" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

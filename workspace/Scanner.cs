@@ -1,5 +1,5 @@
 using System;
-public class _Scanner
+public class Scanner
 {
     readonly private System.Globalization.CultureInfo info;
     readonly System.IO.TextReader reader;
@@ -7,11 +7,10 @@ public class _Scanner
     int position;
 
     public char[] Separator { get; set; }
-    public _Scanner(System.IO.TextReader reader, string separator = null, System.Globalization.CultureInfo info = null)
+    public Scanner(System.IO.TextReader reader = null, string separator = null, System.Globalization.CultureInfo info = null)
     {
-        if (reader == null)
-            throw new ArgumentNullException("reader");
-        this.reader = reader;
+
+        this.reader = reader ?? Console.In;
         if (string.IsNullOrEmpty(separator))
             separator = " ,";
         this.Separator = separator.ToCharArray();
@@ -21,20 +20,10 @@ public class _Scanner
     {
         if (this.position < this.buffer.Length)
             return this.buffer[this.position++];
-        this.buffer = this.reader.ReadLine().Split(this.Separator, StringSplitOptions.RemoveEmptyEntries);
+        do this.buffer = this.reader.ReadLine().Split(this.Separator, StringSplitOptions.RemoveEmptyEntries);
+        while (this.buffer.Length == 0);
         this.position = 0;
         return this.buffer[this.position++];
-    }
-
-    public string[] ScanToEndLine()
-    {
-        if (this.position >= this.buffer.Length)
-            return this.reader.ReadLine().Split(this.Separator, StringSplitOptions.RemoveEmptyEntries);
-        var size = this.buffer.Length - this.position;
-        var ar = new string[size];
-        Array.Copy(this.buffer, position, ar, 0, size);
-        return ar;
-
     }
 
     public string ScanLine()
@@ -56,9 +45,7 @@ public class _Scanner
     {
         var ar = new string[length];
         for (int i = 0; i < length; i++)
-        {
             ar[i] = this.Scan();
-        }
         return ar;
     }
 
