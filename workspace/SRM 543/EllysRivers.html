@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 543 - 500: EllysRivers</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 543</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>500</span>
+        <span id='problem-name'>EllysRivers</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1">Shopping is by no means an easy task. Yes, sure, if you want to buy shoes or some clothes that's no problem at all. But what happens if you would like an extremely rare poison, found only in the mists of Amazonia? Now you see, Elly's life is not as easy as you would think. She has almost reached her final destination, but unfortunately she can only use boats and travel by foot for the final part.<p></p>
+
+There are N+1 really long, but narrow parallel islands, going from South to North, numbered from 0 to N, inclusive. There are also N rivers between the islands, numbered from 0 to N-1, inclusive. River i is <b>width</b>[i] kilometers wide and flows between islands i and i+1. The speed of the current in each river is negligible. For river i, the maximum speed at which Elly can sail is <b>speed</b>[i] kilometers per hour, regardless of the direction in which she sails.<p></p>
+
+All islands are <b>length</b> kilometers long. Starting from the southmost point, each one has boat docks one kilometer apart throughout its entire coastline. Thus, there are <b>length</b> + 1 docks on each island (at kilometer 0, 1, …, <b>length</b>). The islands are so narrow, that you can assume the same dock serves the boats on both sides of the island, and that walking horizontally from one side of the island to the other takes no time.<p></p>
+
+For simplicity we can represent the islands as parallel vertical line segments, and the docks as points on the plane. Island 0 goes from point (0, 0) to (0, <b>length</b>), island 1 from (<b>width</b>[0], 0) to (<b>width</b>[0], <b>length</b>), island 2 from (<b>width</b>[0] + <b>width</b>[1], 0) to (<b>width</b>[0] + <b>width</b>[1], length), and so on, where <b>width</b>[i] gives the width of the i-th river. The docks on island 0 are with coordinates (0, 0), (0, 1), … (0, <b>length</b>); the ones on island 1 are with coordinates (<b>width</b>[0], 0), (<b>width</b>[0], 1), …, (<b>width</b>[0], <b>length</b>); these on island 2 are with coordinates (<b>width</b>[0] + <b>width</b>[1], 0), (<b>width</b>[0] + <b>width</b>[1], 1), …, (<b>width</b>[0] + <b>width</b>[1], <b>length</b>) and so on.<p></p>
+
+Elly can only take boats from dock to dock (i.e. she can neither depart from nor arrive at non-integer coordinates). She can also walk (vertically) along any island with a constant speed of <b>walk</b> kilometers per hour. The girl is currently on the southmost point of the westmost island and wants to reach the northmost point of the eastmost island. Elly wonders what is the minimal time required to travel to her destination. Help her by writing a method that calculates this for her.<p></p>
+
+You are given the length of the islands in the <type>int</type> <b>length</b> and the walking speed in the <type>int</type> <b>walk</b>. The widths of the rivers will be given in the <type>int[]</type> <b>width</b> and the maximal sailing speeds in the <type>int[]</type> <b>speed</b>. Return a <type>double</type> giving the shortest time in which she can reach her destination.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>EllysRivers</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>getMin</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        int
+                    , 
+                        int
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        double
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        double getMin(int length, int walk, int[] width, int[] speed)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note escaped="1">Your return value must have a relative or an absolute error of less than 1e-9.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>length</b> will be between 1 and 100,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>walk</b> will be between 1 and 1,000,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>width</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>speed</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>width</b> and <b>speed</b> will contain the same number of elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>width</b> will be between 1 and 1,000,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>speed</b> will be between 1 and 1,000,000, inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">length</span>
+                                <span class="value data">
+                                
+                                    10
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">walk</span>
+                                <span class="value data">
+                                
+                                    3
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">width</span>
+                                <span class="value data">
+                                
+                                    { 5, 2, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">speed</span>
+                                <span class="value data">
+                                
+                                    { 5, 2, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            3.231651964071508
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Elly will not walk on any of the islands. She will sail four kilometers to the north in the first river,<br />
+reaching the second island at point (5, 4). Then she sails another one kilometer to the north in the second river,<br />
+going to (7, 5) on the third island. In the end she will sail to her destination at (10, 10).<br />
+The required times for her journey are as follows:
+<ul>
+<li>(0, 0) -&gt; (5, 4) = 6.403124237433 / 5 = 1.280624847487 hours</li>
+<li>(5, 4) -&gt; (7, 5) = 2.236067977499 / 2 = 1.118033988749 hours</li>
+<li>(7, 5) -&gt; (10, 10) = 5.830951894845 / 7 = 0.832993127835 hours</li>
+</ul></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">length</span>
+                                <span class="value data">
+                                
+                                    10000
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">walk</span>
+                                <span class="value data">
+                                
+                                    211
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">width</span>
+                                <span class="value data">
+                                
+                                    { 911 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">speed</span>
+                                <span class="value data">
+                                
+                                    { 207 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            48.24623664712219
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Don't forget that Elly can walk on the islands.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">length</span>
+                                <span class="value data">
+                                
+                                    1337
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">walk</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">width</span>
+                                <span class="value data">
+                                
+                                    { 100, 200, 300, 400 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">speed</span>
+                                <span class="value data">
+                                
+                                    { 11, 12, 13, 14 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            128.57830549575695
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">length</span>
+                                <span class="value data">
+                                
+                                    77
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">walk</span>
+                                <span class="value data">
+                                
+                                    119
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">width</span>
+                                <span class="value data">
+                                
+                                    { 11, 12, 13, 14 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">speed</span>
+                                <span class="value data">
+                                
+                                    { 100, 200, 300, 400 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            0.3842077071089629
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">length</span>
+                                <span class="value data">
+                                
+                                    7134
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">walk</span>
+                                <span class="value data">
+                                
+                                    1525
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">width</span>
+                                <span class="value data">
+                                
+                                    { 11567, 19763, 11026, 10444, 24588, 22263, 17709, 11181, 15292, 28895, 15039, 18744, 19985, 13795, 26697, 18812, 25655, 13620, 28926, 12393 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">speed</span>
+                                <span class="value data">
+                                
+                                    { 1620, 1477, 2837, 2590, 1692, 2270, 1655, 1078, 2683, 1475, 1383, 1153, 1862, 1770, 1671, 2318, 2197, 1768, 1979, 1057 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            214.6509731258811
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">A large random example.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

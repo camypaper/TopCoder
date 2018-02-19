@@ -1,48 +1,104 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-[TestClass]
-public class ${ClassName}Test
+using System.Collections.Generic;
+public partial class Tester
 {
-${<foreach Examples e}
-    [TestMethod]
-    public void Example${e.Num}()
+    public bool ManualTest(${Method.Params},bool __fast=true)
     {
+        if(!__fast)
+        {
+${<foreach Method.Params p}${<if !p.Type.Array}
+        Console.WriteLine("${p.Name}:{0}", ${p.Name});
+${<else}
+        Console.WriteLine(string.Format("${p.Name}:{0}", string.Join(" ",${p.Name})));
+${<end}${<end}
+        }
+        ${Method.ReturnType} __result = new ${ClassName}().${Method.Name}(${foreach Method.Params p , }${p.Name}${end});
+        if(!__fast)
+        {
+${<if !Method.ReturnType.Array}
+        Console.WriteLine("Result:{0}", __result);
+${<else}
+        Console.WriteLine(string.Format("Result:{0}",string.Join(" ", __result)));
+${<end}
+        }
+        return true;
+    }
+
+${<foreach Examples e}
+    public bool Example${e.Num}(bool fast = false)
+    {
+        Console.WriteLine("Example${e.Num}");
+        
 ${<foreach e.Input in}
 ${<if !in.Param.Type.Array}
         ${in.Param.Type.Primitive} ${in.Param.Name} = ${in};
-        Console.WriteLine("${in.Param.Name}:{0}",${in.Param.Name});
 ${<else}
-        ${in.Param.Type.Primitive}[] ${in.Param.Name} = new ${in.Param.Type} {${foreach in.ValueList v ,}
-            ${v}${end}
-        };
-        Console.WriteLine(string.Format("${in.Param.Name}:{0}",string.Join(" ",${in.Param.Name})));
+        ${in.Param.Type.Primitive}[] ${in.Param.Name} = new ${in.Param.Type} {${foreach in.ValueList v ,} ${v} ${end} };
 ${<end}
 ${<end}
+
+${<foreach e.Input in}
+${<if !in.Param.Type.Array}
+        Console.WriteLine("${in.Param.Name}:{0}", ${in.Param.Name});
+${<else}
+        Console.WriteLine(string.Format("${in.Param.Name}:{0}", string.Join(" ", ${in.Param.Name})));
+${<end}
+${<end}
+
+
 ${<if !e.Output.Param.Type.Array}
         ${e.Output.Param.Type.Primitive} __expected = ${e.Output};
-        Console.WriteLine("__expected:{0}",__expected);
+        Console.WriteLine("Expected:{0}", __expected);
 ${<else}
         ${e.Output.Param.Type.Primitive}[] __expected = new ${e.Output.Param.Type} {${foreach e.Output.ValueList v ,}
             ${v}${end}
         };
-        Console.WriteLine(string.Format("__expected:{0}",string.Join(" ",__expected)));
+        Console.WriteLine(string.Format("Expected:{0}", string.Join(" ",__expected)));
 ${<end}
         ${Method.ReturnType} __result = new ${ClassName}().${Method.Name}(${foreach e.Input in , }${in.Param.Name}${end});
 ${<if !e.Output.Param.Type.Array}
-        Console.WriteLine("__result:{0}",__result);
+        Console.WriteLine("__result:{0}", __result);
 ${<else}
-        Console.WriteLine(string.Format("__result:{0}",string.Join(" ",__result)));
-${<end}        
+        Console.WriteLine(string.Format("Result:{0}",string.Join(" ", __result)));
+${<end}
 ${<if Method.ReturnType.RealNumber}
-        Assert.AreEqual(__expected, __result,1e-9);
+        return check(__expected, __result);
 ${<else}
     ${<if Method.ReturnType.Array}
-        CollectionAssert.AreEquivalent(__expected, __result);
-     ${<else}   
-        Assert.AreEqual(__expected, __result);
+        return check(__expected, __result);
+     ${<else}
+    return check(__expected, __result);
     ${<end}
 ${<end}
-    }
+}
 
 ${<end}
+    bool check(double ex, double res)
+    {
+        var d = Math.Abs(res - ex);
+        if (d <= 1e-9) return true;
+        d /= Math.Abs(ex);
+        if (d <= 1e-9) return true;
+        return false;
+    }
+    bool check(double[] ex, double[] res)
+    {
+        if (ex.Length != res.Length) return false;
+        for (int i = 0; i < ex.Length; i++)
+            if (!check(ex[i], res[i])) return false;
+        return true;
+    }
+    bool check<T>(T ex, T res)
+        where T : IComparable<T>
+    {
+        return ex.CompareTo(res) == 0;
+    }
+    bool check<T>(T[] ex, T[] res)
+        where T : IComparable<T>
+    {
+        if (ex.Length != res.Length) return false;
+        for (int i = 0; i < ex.Length; i++)
+            if (!check(ex[i], res[i])) return false;
+        return true;
+    }
 }

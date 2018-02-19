@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 635 - 250: SimilarRatingGraph</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 635</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>SimilarRatingGraph</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1"><p><i>
+Recently, I realized that a rating graph can have two different intervals that look quite similar. Write a program that would detect such intervals.
+</i></p>
+<br />
+<p>
+You're given a user's rating graph in two <type>int[]</type>s: <tt><b>date</b></tt> and <tt><b>rating</b></tt>. Suppose that a user has participated in <tt>N</tt> contests; for <tt>0 &lt;= i &lt; N</tt>, the <tt>i</tt>-th contest has timestamp <tt><b>date</b>[i]</tt> and the user's rating after this contest was <tt><b>rating</b>[i]</tt>.
+</p>
+<br />
+<p>
+Formally, the rating graph is a sequence of points <tt>(<b>date</b>[i],<b>rating</b>[i])</tt>; an interval of the rating graph is a contiguous subsequence of those points - i.e., a subsequence corresponding to a contiguous range of indices. Two intervals are similar if one can be obtained from the other only by translation and scaling by a positive real factor (zooming). Note that both dimensions must be scaled by the same factor.
+</p>
+<br />
+<p>
+Consider the polyline obtained by visiting the points of an interval of the rating graph in order. The total length of this polyline is called the length of that interval.
+</p>
+<br />
+<p>
+Find the longest interval <tt>I</tt> of the given rating graph that's similar to some other (possibly partially overlapping) interval of that same rating graph and return the length of <tt>I</tt>.
+</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>SimilarRatingGraph</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>maxLength</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        int[]
+                    , 
+                        int[]
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        double
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        double maxLength(int[] date, int[] rating)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>256</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><tt><b>date</b></tt> and <tt><b>rating</b></tt> will contain the same number of elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><tt><b>date</b></tt> will contain between <tt>2</tt> and <tt>400</tt> elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <tt><b>date</b></tt> will be between <tt>1</tt> and <tt>1,000,000</tt>, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The elements of <tt><b>date</b></tt> will be in strictly increasing order.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <tt><b>rating</b></tt> will be between <tt>1</tt> and <tt>5,000</tt>, inclusive. </user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 4, 8, 16, 32 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 4, 8, 16, 32 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            42.42640687119285
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The longest interval that's similar to another interval has length <tt>30*sqrt(2)</tt> and is formed by points (2,2), (4,4), ..., (32,32). It's similar to the interval formed by points (1,1), (2,2), ..., (16,16).</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 81, 104, 120, 124, 134, 137 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 1866, 2332, 2510, 2678, 2876, 3002 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            168.04761230080004
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 10, 11, 13, 15, 19 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 10, 14, 15, 23, 25 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            12.7183472062349
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 3, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 1700, 1800, 1750, 1850 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            100.00499987500625
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 3, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 1, 4, 9, 16 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            0.0
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Here, only an interval consisting of a single point can be similar to another interval. The length of such an interval is obviously 0.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">date</span>
+                                <span class="value data">
+                                
+                                    { 5, 11, 25, 58, 92, 162, 255, 350, 458, 566, 677, 792, 919, 1051, 1189, 1331, 1489, 1673, 1882, 2093, 2315, 2541, 2771, 3012, 3254, 3524, 3797, 4087, 4379, 4675, 4973, 5278, 5588, 5904, 6225, 6550, 6888, 7249, 7612, 8018, 8428, 8847, 9267, 9688, 10109, 10530, 10964, 11407, 11870, 12340, 12811, 13288, 13768, 14249, 14734, 15242, 15774, 16306, 16847, 17400, 17966, 18533, 19108, 19692, 20278, 20871, 21471, 22074, 22679, 23297, 23916, 24553, 25190, 25829, 26472, 27135, 27814, 28497, 29181, 29865, 30555, 31272, 31994, 32729, 33487, 34246, 35005, 35764, 36537, 37326, 38119, 38913, 39725, 40538, 41360, 42185, 43010, 43840, 44671, 45509, 46350, 47205, 48063, 48932, 49807, 50691, 51577, 52464, 53289, 54119, 54950, 55788, 56629, 57484, 58342, 59211, 60086, 60970, 61856, 62743, 63568, 64398, 65388 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">rating</span>
+                                <span class="value data">
+                                
+                                    { 1505, 1462, 1436, 1416, 1463, 1421, 1411, 1450, 1497, 1465, 1423, 1394, 1391, 1367, 1358, 1323, 1310, 1279, 1268, 1279, 1311, 1342, 1359, 1387, 1414, 1376, 1424, 1382, 1373, 1335, 1359, 1318, 1275, 1266, 1227, 1203, 1168, 1163, 1184, 1144, 1169, 1207, 1250, 1235, 1209, 1162, 1124, 1148, 1168, 1202, 1190, 1155, 1179, 1194, 1195, 1195, 1203, 1240, 1218, 1245, 1220, 1190, 1208, 1180, 1182, 1148, 1139, 1126, 1152, 1159, 1147, 1158, 1112, 1091, 1101, 1116, 1123, 1086, 1126, 1110, 1128, 1085, 1132, 1145, 1135, 1140, 1117, 1081, 1120, 1131, 1081, 1032, 1071, 1102, 1071, 1065, 1068, 1027, 980, 947, 987, 968, 959, 980, 990, 974, 1003, 996, 999, 958, 911, 878, 918, 899, 890, 911, 921, 905, 934, 927, 930, 889, 844 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            11940.179271014536
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

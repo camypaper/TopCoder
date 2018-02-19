@@ -1,0 +1,145 @@
+using System;
+using System.Collections.Generic;
+public partial class Tester
+{
+    public bool ManualTest(int L, int H, int K,bool __fast=true)
+    {
+        if(!__fast)
+        {
+        Console.WriteLine("L:{0}", L);
+        Console.WriteLine("H:{0}", H);
+        Console.WriteLine("K:{0}", K);
+        }
+        int __result = new Spacetsk().countsets(L, H, K);
+        if(!__fast)
+        {
+        Console.WriteLine("Result:{0}", __result);
+        }
+        return true;
+    }
+
+    public bool Example0(bool fast = false)
+    {
+        Console.WriteLine("Example0");
+        int L = 1;
+        Console.WriteLine("L:{0}", L);
+        int H = 1;
+        Console.WriteLine("H:{0}", H);
+        int K = 2;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 4;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    public bool Example1(bool fast = false)
+    {
+        Console.WriteLine("Example1");
+        int L = 1;
+        Console.WriteLine("L:{0}", L);
+        int H = 1;
+        Console.WriteLine("H:{0}", H);
+        int K = 1;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 4;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    public bool Example2(bool fast = false)
+    {
+        Console.WriteLine("Example2");
+        int L = 2;
+        Console.WriteLine("L:{0}", L);
+        int H = 2;
+        Console.WriteLine("H:{0}", H);
+        int K = 1;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 9;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    public bool Example3(bool fast = false)
+    {
+        Console.WriteLine("Example3");
+        int L = 2;
+        Console.WriteLine("L:{0}", L);
+        int H = 2;
+        Console.WriteLine("H:{0}", H);
+        int K = 2;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 23;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    public bool Example4(bool fast = false)
+    {
+        Console.WriteLine("Example4");
+        int L = 5;
+        Console.WriteLine("L:{0}", L);
+        int H = 5;
+        Console.WriteLine("H:{0}", H);
+        int K = 3;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 202;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    public bool Example5(bool fast = false)
+    {
+        Console.WriteLine("Example5");
+        int L = 561;
+        Console.WriteLine("L:{0}", L);
+        int H = 394;
+        Console.WriteLine("H:{0}", H);
+        int K = 20;
+        Console.WriteLine("K:{0}", K);
+        int __expected = 786097180;
+        Console.WriteLine("Expected:{0}", __expected);
+        int __result = new Spacetsk().countsets(L, H, K);
+        Console.WriteLine("__result:{0}", __result);
+        return check(__expected, __result);
+    }
+
+    bool check(double ex, double res)
+    {
+        var d = Math.Abs(res - ex);
+        if (d <= 1e-9) return true;
+        d /= Math.Abs(ex);
+        if (d <= 1e-9) return true;
+        return false;
+    }
+    bool check(double[] ex, double[] res)
+    {
+        if (ex.Length != res.Length) return false;
+        for (int i = 0; i < ex.Length; i++)
+            if (!check(ex[i], res[i])) return false;
+        return true;
+    }
+    bool check<T>(T ex, T res)
+        where T : IComparable<T>
+    {
+        return ex.CompareTo(res) == 0;
+    }
+    bool check<T>(T[] ex, T[] res)
+        where T : IComparable<T>
+    {
+        if (ex.Length != res.Length) return false;
+        for (int i = 0; i < ex.Length; i++)
+            if (!check(ex[i], res[i])) return false;
+        return true;
+    }
+}

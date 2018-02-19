@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 606 - 450: EllysPairing</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 606</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>450</span>
+        <span id='problem-name'>EllysPairing</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1"><i>Please note that this problem has a non-standard memory limit: 16 megabytes.</i><br /><br />
+
+Elly is quite excited! She is about to participate in an awesome initiative: several universities from all around the world are collaborating on a pair-programming project. Now the organizers of the initiative want to form the pairs (teams of two people) that will work on the project.<br /><br />
+
+Any two people may be paired, regardless of whether they are from the same university or not. However, it is awkward when the two teammates share the same name. Therefore the organizers would like to maximize the number of pairs such that the two paired participants have different names.<br /><br />
+
+There are <b>M</b> different possible names, <b>M</b> being an exact power of two (e.g., 1, 2, 32, 131072, 1073741824). For simplicity, we will represent each name as a number between 0 and <b>M</b>-1, inclusive. You are given the <type>int</type> <b>M</b> and the <type>int[]</type>s <b>count</b>, <b>first</b>, <b>mult</b>, and <b>add</b>. Their meaning is as follows. University <i>i</i> sends <b>count</b>[i] people. The name of the first participant from that university is <b>first</b>[i]. The name of the second participant from that university (say second[i]) is (<b>first</b>[i] * <b>mult</b>[i] + <b>add</b>[i]) modulo <b>M</b>. The name of the third one (say third[i]) is (second[i] * <b>mult</b>[i] + <b>add</b>[i]) modulo <b>M</b>, and so on. See the notes for important information about an efficient implementation of the given generation process.<br /><br />
+
+Return the maximum number of disjoint pairs in which the two people have different names.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>EllysPairing</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>getMax</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        int
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        int
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        int getMax(int M, int[] count, int[] first, int[] mult, int[] add)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>16</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note escaped="1">In order to make the generation of the names more efficient, it is guaranteed that <b>M</b> will be an exact power of two. Thus, instead of computing modulo <b>M</b>, the next name can be computed from the previous one by using the following formula: next = (previous * <b>mult</b>[i] + <b>add</b>[i]) &amp; (<b>M</b> - 1). In this formula, '&amp;' is the bitwise operator AND.</note></li>
+        
+            <li><note escaped="1">Depending on your programming language, you may make the generation of names even faster by using 32-bit integers only. Even though the multiplication may overflow, the &amp; will then only select the bits we are interested in, and those will be correct. (Note that in C++ you should use <i>unsigned</i> 32-bit integers. Even though your code will probably also work with signed ints, signed integer overflow leads to undefined behavior in C++.)</note></li>
+        
+            <li><note escaped="1">The bitwise operator AND (the operator '&amp;' in C++, Java, Python, and C#; the operator 'And' in VB) takes the binary representation of two numbers and creates a new number which has 1-bits only in the positions where both initial numbers had 1. For example 5 &amp; 3 = 1, since 101 &amp; 011 = 001.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>M</b> will be between 1 and 1,073,741,824, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>M</b> will be an exact power of two.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>count</b>, <b>first</b>, <b>mult</b>, and <b>add</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>count</b>, <b>first</b>, <b>mult</b>, and <b>add</b> will contain the same number of elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>count</b> will be between 1 and 1,000,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>first</b>, <b>mult</b>, and <b>add</b> will be between 0 and <b>M</b>-1, inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">M</span>
+                                <span class="value data">
+                                
+                                    16
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">count</span>
+                                <span class="value data">
+                                
+                                    { 4, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">first</span>
+                                <span class="value data">
+                                
+                                    { 5, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">mult</span>
+                                <span class="value data">
+                                
+                                    { 2, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">add</span>
+                                <span class="value data">
+                                
+                                    { 1, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            5
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The people from university 0 have names {5, 7, 11, 15} and the ones from university 1 have names {1, 3, 3, 9, 9, 11, 11}.<br />
+Since the number of people is odd, there can be at most 5 pairs altogether.<br />
+It turns out that each of those pairs can contain two people with different names!<br />
+One of the possible pairings is: {(5, 15), (7, 3), (11, 9), (1, 3), (9, 11)}.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">M</span>
+                                <span class="value data">
+                                
+                                    8
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">count</span>
+                                <span class="value data">
+                                
+                                    { 6, 4, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">first</span>
+                                <span class="value data">
+                                
+                                    { 0, 3, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">mult</span>
+                                <span class="value data">
+                                
+                                    { 3, 7, 5 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">add</span>
+                                <span class="value data">
+                                
+                                    { 0, 3, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            5
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">In this example the people have names {0, 3, 2, 0, 0, 4, 0, 3, 6, 0, 0, 0, 0}.<br />
+In the best solution there are 5 pairs such that the two people have different names. Additionally, there is one pair in which both people have the same name and one other person without a partner.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">M</span>
+                                <span class="value data">
+                                
+                                    128
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">count</span>
+                                <span class="value data">
+                                
+                                    { 42, 13, 666, 17, 1337, 42, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">first</span>
+                                <span class="value data">
+                                
+                                    { 18, 76, 3, 122, 0, 11, 11 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">mult</span>
+                                <span class="value data">
+                                
+                                    { 33, 17, 54, 90, 41, 122, 20 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">add</span>
+                                <span class="value data">
+                                
+                                    { 66, 15, 10, 121, 122, 1, 30 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            1059
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">M</span>
+                                <span class="value data">
+                                
+                                    1048576
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">count</span>
+                                <span class="value data">
+                                
+                                    { 4242, 42, 9872, 13, 666, 21983, 17, 1337, 42, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">first</span>
+                                <span class="value data">
+                                
+                                    { 19, 18, 76, 42, 3, 112, 0, 11, 11, 12 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">mult</span>
+                                <span class="value data">
+                                
+                                    { 27, 33, 10, 8, 17, 9362, 90, 41, 122, 20 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">add</span>
+                                <span class="value data">
+                                
+                                    { 98, 101, 66, 15, 10, 144, 3, 1, 5, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            16232
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">M</span>
+                                <span class="value data">
+                                
+                                    1073741824
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">count</span>
+                                <span class="value data">
+                                
+                                    { 894602, 946569, 887230, 856152, 962583, 949356, 904847, 829100, 842183, 958440, 811081, 864078, 809209, 938727, 949135, 892809, 816528, 961237, 979142, 890922 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">first</span>
+                                <span class="value data">
+                                
+                                    { 844085078, 898937259, 243490172, 887804102, 187696417, 156820442, 237600210, 618812924, 153000239, 912364033, 254936966, 650298774, 982988140, 649258331, 566444626, 201481721, 492943390, 1061953081, 492672963, 960519711 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">mult</span>
+                                <span class="value data">
+                                
+                                    { 1036482037, 583219072, 819168094, 253755052, 548208982, 401830167, 638626082, 43642932, 123607749, 485521178, 860368129, 30334704, 219771462, 733375600, 130839219, 415503960, 294132484, 1044831462, 256910484, 198852170 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">add</span>
+                                <span class="value data">
+                                
+                                    { 889169006, 604831366, 967292994, 980686280, 844875791, 1027687492, 357734882, 295879743, 48284748, 421729100, 1049536313, 327207332, 948053446, 271229570, 664579359, 795815285, 842856528, 876662975, 675611938, 634229925 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            8971965
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Don't forget that the memory limit for the problem is only 16 megabytes! We recommend that you test this example in the arena before you submit.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder Single Round Match 652 - 500: MaliciousPath</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>Single Round Match 652</span>
+        
+        <span id='problem-score'>500</span>
+        <span id='problem-name'>MaliciousPath</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1"><p>
+Alice and Bob are playing a game on a graph.
+The graph has <type>int</type> <b>N</b> nodes, and M directed edges.
+The graph is described by the <type>int[]</type> <b>from,to,cost</b>.
+The i-th edge is a directed edge that connects node <b>from</b>[i] to node <b>to</b>[i] and has weight <b>cost</b>[i].
+This graph may have self loops or multiple edges.
+Each node has at least one outgoing edge. 
+</p>
+
+<p>
+Alice is currently at at node 0. 
+She wishes to travel to node N-1.
+Bob initially has <b>K</b> tokens.
+
+At each node along Alice's path, she will first announce which outgoing edge she intends to traverse.
+If Bob wishes and if he still has a token, he may spend one token and choose a different outgoing edge from Alice's current node.
+Alice will then be forced to travel along the edge chosen by Bob and incur the cost of this edge.
+If Bob does not use a token, Alice travels along the edge she announced, incurring the cost of the edge.
+Alice knows how many tokens Bob has remaining at all times.
+The game ends when Alice reaches node N-1, or she traverses an edge 1,000,000,000 times without reaching the node N-1.
+</p>
+
+<p>
+Alice wishes to minimize her travel time.
+Bob will use his tokens in such a way that Alice cannot reach node N-1 if it is possible. 
+Otherwise, he will use them to maximize the total cost that Alice incurs before reaching node N-1, and Alice will always choose an option to minimize the total cost.
+If it is not possible for Alice to make it to node N-1, return -1.
+Otherwise, compute and return the minimum time that Alice can guarantee to reach the node N-1.
+</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>MaliciousPath</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>minPath</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        int
+                    , 
+                        int
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        long
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        long minPath(int N, int K, int[] from, int[] to, int[] cost)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>256</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>N</b> will be between 2 and 1,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>from,to,cost</b> will each contain between 1 and 2,500 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>from,to,cost</b> will contain the same number of elements.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>from,to</b> will be between 0 and N-1, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>cost</b> will be between 0 and 1,000,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each integer between 0 and N-1, inclusive, will appear at least once in the array <b>from</b>.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>K</b> will be between 0 and 1,000, inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    3
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    1000
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 1, 1, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 1, 0, 2, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 3, 2, 1, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            5004
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+When Alice is at node 0, she will attempt to travel to node 1 using the first edge.
+Bob will do nothing.
+When Alice is at node 1, she will attempt to travel to node 2 using the third edge.
+If Bob has a token, Bob will make her go back to node 0 instead using the fourth edge.
+Thus, Alice has to travel the cycle 0-&gt;1-&gt;0 1000 times before she can successfully make it to node 2.
+This will yield a total cost of 5004.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    4
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    1
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 0, 1, 1, 1, 2, 2, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 1, 3, 0, 2, 3, 2, 1, 3 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 0, 100, 103, 0, 0, 34, 102, 33 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            100
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+In this case, Alice's optimal strategy is to attempt to go to node 3 directly from node 0. Bob's optimal response will be not use a token, allowing Alice to reach node 3.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    10
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 4, 6, 6, 7, 7, 8, 8, 9, 9, 9, 9 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 2, 10, 10, 1, 2, 10, 10, 1, 2, 10, 100, 10, 2, 1, 10, 10, 2, 1, 10, 10, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            514
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    50
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    200
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 13, 8, 17, 3, 8, 4, 21, 11, 20, 2, 18, 21, 2, 4, 9, 17, 0, 14, 10, 15, 18, 1, 22, 10, 14, 19, 24, 5, 5, 12, 7, 7, 16, 19, 13, 20, 15, 23, 6, 23, 9, 3, 6, 16, 11, 22, 24, 12, 1, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35, 36, 36, 37, 37, 38, 38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48, 49, 49, 37, 9, 14, 0, 33, 20, 46, 26, 12, 11, 2, 7, 34, 19, 37, 5, 2, 17, 41, 16, 34, 13, 18, 35, 6, 14, 16, 25, 9, 10, 5, 10, 7, 36, 45, 3, 6, 22, 32, 28, 45, 40, 16, 36, 28, 16, 34, 1, 9, 19, 18, 6, 15, 29, 12, 5, 44, 33, 49, 14, 40, 1, 30, 21, 37, 49, 1, 44, 42, 6, 38, 1, 31, 40, 37, 34, 35, 6, 43, 29, 41, 48, 17, 4, 38, 26, 4, 46, 43, 6, 27, 30, 0, 16, 40, 33, 0, 42, 41, 10, 33, 47, 11, 37, 49, 25, 36, 20, 47, 12, 28, 17, 11, 17, 26, 26, 37, 34, 27, 17, 8, 2, 13, 43, 36, 28, 1, 23, 29, 40, 18, 22, 0, 7, 30, 23, 3, 39, 5, 23, 28, 38, 44, 19, 43, 15, 16, 43, 5, 27, 24, 25, 7, 16, 38, 33, 33, 1, 9, 25, 47, 0, 31, 30, 29, 4, 36, 49, 26, 6, 39, 40, 28, 39, 48, 26, 2, 15, 41, 42, 32, 0, 35, 34, 28, 30, 40, 3, 33, 16, 15, 41, 45, 12, 33, 35, 16, 47, 34, 23 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 41, 42, 17, 0, 2, 7, 28, 32, 31, 33, 6, 42, 11, 13, 7, 40, 47, 21, 4, 6, 19, 15, 4, 18, 30, 25, 2, 10, 30, 34, 1, 47, 35, 23, 3, 0, 9, 25, 42, 21, 4, 6, 47, 32, 5, 40, 5, 0, 8, 49, 16, 29, 8, 11, 42, 33, 35, 26, 27, 43, 35, 6, 14, 13, 44, 25, 13, 42, 2, 26, 17, 3, 40, 31, 18, 12, 24, 37, 0, 37, 15, 44, 35, 40, 10, 1, 35, 47, 36, 33, 2, 39, 23, 28, 32, 0, 6, 21, 33, 41, 0, 19, 16, 29, 35, 16, 44, 6, 18, 17, 2, 46, 41, 11, 27, 5, 44, 1, 48, 15, 43, 8, 41, 33, 16, 11, 45, 47, 19, 41, 14, 41, 8, 24, 13, 3, 44, 41, 42, 30, 31, 44, 21, 14, 43, 48, 0, 6, 25, 38, 36, 14, 36, 22, 43, 15, 20, 19, 37, 25, 17, 44, 17, 46, 8, 25, 33, 19, 42, 40, 42, 24, 15, 31, 34, 8, 41, 25, 20, 29, 2, 5, 43, 28, 33, 40, 31, 27, 6, 21, 9, 35, 8, 8, 26, 13, 11, 31, 4, 4, 30, 34, 35, 1, 15, 11, 10, 24, 15, 24, 23, 16, 24, 32, 9, 1, 6, 17, 48, 6, 35, 19, 12, 5, 21, 23, 25, 9, 17, 47, 19, 23, 22, 35, 19, 5, 1, 10, 9, 41, 11, 45, 0, 23, 0, 11, 39, 0, 17, 2, 18, 4, 17, 24, 0, 10, 19, 4, 36, 22, 42, 18, 13, 48, 27, 11, 19, 28, 31, 39, 32, 48, 2, 26, 38, 43, 38, 49, 34, 37, 11, 9, 11, 14, 12, 9, 37, 0, 22, 14, 15, 0, 8, 23, 7, 43, 5, 8, 16, 47 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 494, 848305, 3326, 6008, 223, 2, 6, 673, 152335, 25, 713909, 42842, 122, 9941, 361853, 35, 20157, 1098, 41, 83693, 365851, 43843, 622, 591230, 7722, 2489, 7, 861622, 21272, 169, 1153, 3, 7, 3, 577031, 24522, 5, 241, 757900, 11036, 8892, 199, 7, 2, 1, 453031, 115, 13, 125, 67, 35, 91, 33427, 14, 106, 203749, 5, 1804, 4543, 23, 1, 281, 441212, 18, 3, 11629, 233, 388188, 10, 701, 76170, 763, 875, 11606, 44972, 6449, 37409, 83516, 5912, 6, 705899, 26759, 253, 580531, 14215, 21916, 884775, 30, 678, 5940, 17, 480830, 8, 61, 218613, 683352, 4, 557589, 2619, 3658, 221515, 15825, 163577, 25, 9, 1, 4, 13, 2, 88, 147, 110163, 18118, 2, 15429, 211872, 24, 1, 188382, 12500, 2348, 190, 4279, 40, 8428, 56325, 933152, 231523, 9454, 21, 4855, 96168, 1722, 329515, 77, 1, 3, 3518, 10926, 12172, 4, 71, 181976, 1318, 9, 5086, 905, 108490, 80164, 2, 10236, 197, 1880, 17420, 614650, 372457, 13918, 36, 17, 167, 6, 254127, 512, 15, 341436, 1, 186, 96, 7, 3, 42, 4, 3, 4, 492598, 18523, 172302, 1, 421535, 390382, 2952, 6228, 871, 505372, 131266, 5, 743902, 11, 34, 657, 4717, 3196, 259, 192504, 229, 6786, 28, 44364, 21123, 8, 166781, 885021, 2, 828, 497, 376, 24707, 52, 1, 1659, 19402, 27261, 82, 473, 443, 1089, 586, 20, 7, 239277, 27132, 4681, 761, 10644, 17798, 1, 820306, 13330, 19, 293167, 2, 4, 89279, 14, 1, 9, 18023, 1165, 495221, 32304, 538, 178613, 1, 4764, 32767, 114, 103, 1, 302, 428, 92, 927352, 22270, 2646, 3599, 6, 16362, 3, 4, 280286, 338, 652, 2, 347022, 23, 323084, 3338, 46, 58, 1263, 93, 46992, 19112, 1, 19499, 33, 807600, 20296, 16803, 911294, 3151, 1, 793, 1, 1, 504, 62209, 1397, 52726, 3650, 54, 3630, 358480, 178, 394, 28, 137436, 52764, 1209, 1599 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            121213509
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    20
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    1000
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 18 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            19019000000
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">K</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">from</span>
+                                <span class="value data">
+                                
+                                    { 0, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">to</span>
+                                <span class="value data">
+                                
+                                    { 0, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">cost</span>
+                                <span class="value data">
+                                
+                                    { 5, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            -1
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

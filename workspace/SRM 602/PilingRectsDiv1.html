@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 602 - 550: PilingRectsDiv1</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 602</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>550</span>
+        <span id='problem-name'>PilingRectsDiv1</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1">Snake Snuke has 2<b>N</b> rectangles cut out of paper.
+The rectangles are labeled 0 through 2<b>N</b>-1.
+For each i, the side lengths of rectangle i will be denoted X[i] and Y[i].
+<br /><br />
+The number <b>N</b> can be very large, therefore we will use a pseudorandom generator to define the values X[i] and Y[i].
+You are given the following input:
+<ul>
+<li>The <type>int</type> <b>N</b>.</li>
+<li>Two <type>int[]</type>s: <b>XS</b> and <b>YS</b>.</li>
+<li>Six <type>int</type>s: <b>XA</b>, <b>XB</b>, <b>XC</b>, <b>YA</b>, <b>YB</b>, <b>YC</b>.</li>
+</ul>
+<br />
+Use the following pseudocode to generate X and Y:
+<br />
+<pre>
+for (i = 0; i &lt; (length of XS); i++) {
+    X[i] = XS[i];
+    Y[i] = YS[i];
+}
+for (i = (length of XS); i &lt; 2 * N; i++) {
+    X[i] = (X[i - 1] * XA + XB) % XC + 1;
+    Y[i] = (Y[i - 1] * YA + YB) % YC + 1;
+}
+</pre>
+<br />
+Snake Snuke will divide his 2<b>N</b> rectangles into two bags, each bag containing exactly <b>N</b> rectangles.
+Then he will process each bag separately.
+<br /><br />
+When processing a bag, he will take all the rectangles out of the bag and he will place them onto a table, one rectangle at a time.
+Each rectangle (except for the first one) must overlap the immediately previous one, so at the end Snuke will have a pile of <b>N</b> rectangles.
+Snuke may rotate the rectangles, but once placed, the sides of each rectangle must be parallel with the sides of the table.
+(I.e., he may only swap the width and height of some rectangles.)
+After placing all the rectangles, Snuke computes the area that is covered by all <b>N</b> rectangles.
+(Formally, the area of their intersection.)
+That area is called the outcome of that bag.
+<br /><br />
+Snuke wants to maximize the sum of the outcomes of his two bags.
+That is, he must first divide the rectangles into bags in an optimal way, and then process each bag in an optimal way.
+Return the maximal possible sum of the two outcomes.
+</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>PilingRectsDiv1</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>getmax</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        int
+                    , 
+                        int[]
+                    , 
+                        int[]
+                    , 
+                        int
+                    , 
+                        int
+                    , 
+                        int
+                    , 
+                        int
+                    , 
+                        int
+                    , 
+                        int
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        long
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        long getmax(int N, int[] XS, int[] YS, int XA, int XB, int XC, int YA, int YB, int YC)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>256</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>N</b> will be between 1 and 100,000, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>XS</b> will contain between 1 and min{50, 2*<b>N</b>} elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>XS</b> and <b>YS</b> will be contain the same number of elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>XS</b> and <b>YS</b> will be between 1 and 1,000,000,000 (10<sup>9</sup>), inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>XA</b>, <b>XB</b>, <b>YA</b> and <b>YB</b> will be between 0 and 1,000,000,000 (10<sup>9</sup>), inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>XC</b> and <b>YC</b> will be between 1 and 1,000,000,000 (10<sup>9</sup>), inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 1, 2, 3, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 10, 5, 3, 5 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    1
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    1
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            14
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Snuke should put rectangles 0 and 1 in one bag, and rectangles 2 and 3 into the other bag. He can then process the bags as shown in the picture below (where rectangle 0 is labeled as &quot;first&quot;, and so on). The sum of the two areas is 14. There are other equally good solutions, but there is no better solution than 14.
+<br /><br />
+<img src="https://community.topcoder.com/contest/problem/PilingRectsDiv1/rects.png"></img></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 7, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 4, 4 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    9
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    10
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    7
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    9
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            56
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><b>X</b> is {7,7,4,7} and <b>Y</b> is {4,4,7,4}. Note that it is allowed to rotate the rectangles. Regardless of how Snuke divides the rectangles into bags, each bag will contain two 4x7 rectangles. When processing a bag, Snuke can align the two rectangles perfectly. Thus the answer is 28 + 28 = 56.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    3
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 5, 6, 9, 10, 4, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 9, 5, 8, 6, 8, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    1
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    1
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            69
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    10000
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 1000000000 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 1000000000 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    93827162
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    91238127
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    98231267
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    92138287
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    98563732
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    99381279
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            1240119561532788
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Use a 64-bit data type for generating the input data in order to avoid overflow. Also note that the return value is a <type>long</type>.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 375, 571, 973, 896, 460, 930, 583, 530, 657, 590 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 284, 37, 994, 699, 941, 745, 166, 884, 270, 708 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    428
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    1000
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    788
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    851
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    125
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    894
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            420515
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">N</span>
+                                <span class="value data">
+                                
+                                    34734
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XS</span>
+                                <span class="value data">
+                                
+                                    { 898, 579, 465, 665, 875, 391, 583, 901, 326, 133, 656, 562, 701, 707, 492, 617, 455, 441, 382, 952, 689, 656, 334, 877, 120, 318, 497, 25, 569, 962, 845, 562, 632, 898, 882, 498, 595, 889, 382, 507, 791, 548, 810, 606, 105, 869, 569, 970, 322, 974 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YS</span>
+                                <span class="value data">
+                                
+                                    { 83, 18, 492, 27, 339, 622, 851, 915, 464, 347, 287, 210, 282, 166, 976, 167, 968, 769, 14, 383, 454, 983, 319, 165, 185, 315, 795, 851, 124, 287, 846, 745, 19, 639, 894, 828, 540, 420, 147, 452, 501, 670, 466, 554, 166, 1, 446, 808, 508, 172 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XA</span>
+                                <span class="value data">
+                                
+                                    569
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XB</span>
+                                <span class="value data">
+                                
+                                    185
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">XC</span>
+                                <span class="value data">
+                                
+                                    285
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YA</span>
+                                <span class="value data">
+                                
+                                    741
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YB</span>
+                                <span class="value data">
+                                
+                                    304
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">YC</span>
+                                <span class="value data">
+                                
+                                    296
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            10050
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

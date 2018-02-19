@@ -2,65 +2,40 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Watch = System.Diagnostics.Stopwatch;
-using StringBuilder = System.Text.StringBuilder;
-using BitVector = System.Collections.Specialized.BitVector32;
+using Debug = System.Diagnostics.Debug;
+using SB = System.Text.StringBuilder;
 public class ${ClassName}
 {
-	public ${Method.ReturnType} ${Method.Name}(${Method.Params})
+    public ${Method.ReturnType} ${Method.Name}(${Method.Params})
     {
-		return ${Method.ReturnType;zeroval};
-	}
-
-
-${CutBegin}
-    public static void Main(string[] args)
-    {
-        var stream = new System.IO.StreamWriter("dbg.out");
-        System.Diagnostics.Debug.Listeners.Add(new System.Diagnostics.TextWriterTraceListener(stream));
-        var sc= new Scanner(Console.In);
-        var t = new ${ClassName}();
-        var u = new ${ClassName}Test();
-        try
-        {
-            u.Example0();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine(ex.StackTrace);
-        }
-        finally
-        {
-            System.Diagnostics.Debug.Close();
-            System.Threading.Thread.Sleep(System.Threading.Timeout.Infinite);
-        }
+        return ${Method.ReturnType;zeroval};
     }
 
-    
-    public void ManualTest(${Method.Params})
+    static public T[] Enumerate<T>(int n, Func<int, T> f) { var a = new T[n]; for (int i = 0; i < n; ++i) a[i] = f(i); return a; }
+    static public void Swap<T>(ref T a, ref T b) { var tmp = a; a = b; b = tmp; }
+    // CUT begin
+    public ${Method.ReturnType} Naive_Test(${Method.Params})
     {
-        var sw = new System.Diagnostics.Stopwatch();
-        ${<foreach Method.Params p}${<if !p.Type.Array}Console.WriteLine("${p.Name}:{0}",${p.Name});
-        ${<else}Console.WriteLine(string.Format("${p.Name}:{0}",string.Join(" ",${p.Name})));${<end}${<end}
-        sw.Start();
-        var ret = ${Method.Name}(${foreach Method.Params p , }${p.Name}${end});
-        Console.WriteLine("Result:{0}",ret);
-        sw.Stop();
-        Console.WriteLine("Time:{0}ms",sw.ElapsedMilliseconds);
-
+        return ${Method.ReturnType;zeroval};
     }
-    
-${CutEnd}
+
+    // CUT end
 }
-static public partial class EnumerableEX
+static public class EnumerableEX
 {
-    static public string AsString(this IEnumerable<char> source)
+    static public string AsString(this IEnumerable<char> e) { return new string(e.ToArray()); }
+    static public string AsJoinedString<T>(this IEnumerable<T> e, string s = " ") { return string.Join(s, e);}
+}
+// CUT begin
+public partial class Tester: AbstractTester
+{
+
+    public override void Run()
     {
-        return new string(source.ToArray());
-    }
-    static public string AsJoinedString<T>(this IEnumerable<T> source,string s=" ")
-    {
-        return string.Join(s, source);
+        //Tests.Add(null);
+        ${<foreach Examples e}Test(Example${e.Num});
+        ${<end}
+
     }
 }
+// CUT end
