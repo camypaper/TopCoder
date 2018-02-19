@@ -32,7 +32,9 @@ public partial class Tester: AbstractTester
 
     public override void Run()
     {
-        //Tests.Add(null);
+
+
+
         ${<foreach Examples e}Test(Example${e.Num});
         ${<end}
 

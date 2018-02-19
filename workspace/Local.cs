@@ -21,7 +21,7 @@ static class Local {
 #region component
 public abstract class AbstractTester {
     int cnt = 1;
-    public StreamScanner sc = new StreamScanner(new FileStream(@"in.in", FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+    public StreamScanner sc = new StreamScanner(new FileStream(@"in.txt", FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
 
     static public T[] Enumerate<T>(int n, Func<int, T> f) { var a = new T[n]; for (int i = 0; i < n; ++i) a[i] = f(i); return a; }
     public Random rnd = new Random(0);
